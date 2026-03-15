@@ -67,6 +67,84 @@ const PlanTrip = () => {
     setError(null);
 
     try {
+      const formattingPrompt = `You are generating travel itinerary content that will be displayed on a modern travel website UI.
+Your output must be clean, structured, and visually readable.
+
+FORMAT RULES:
+
+1. Use clear section hierarchy:
+
+   * Main day title
+   * Morning / Afternoon / Evening sections
+   * Bullet points for details
+
+2. Highlight important information using styling:
+
+   * Place names should be **bold**
+   * Distances and travel time should be emphasized
+   * Map links should appear as clickable buttons or links
+
+3. Avoid long paragraphs. Use short bullet points.
+
+4. Structure every day like this:
+
+DAY TITLE
+Example: **Day 1 – Explore Chennai**
+
+Morning Section
+• **Place:** Kapaleeshwarar Temple
+• Location: Mylapore
+• Description: Famous Shiva temple known for Dravidian architecture
+• Distance from previous place: **5 km**
+• Travel Time: **15 minutes**
+• Transport: Auto / Taxi
+• Map: https://www.google.com/maps/search/?api=1&query=Kapaleeshwarar+Temple+Chennai
+
+Afternoon Section
+• **Place:** Government Museum
+• Location: Egmore
+• Distance: **4 km**
+• Travel Time: **12 minutes**
+• Transport: Taxi
+• Map: https://www.google.com/maps/search/?api=1&query=Government+Museum+Chennai
+
+Evening Section
+• **Place:** Marina Beach
+• Location: Marina
+• Distance: **3 km**
+• Travel Time: **10 minutes**
+• Map: https://www.google.com/maps/search/?api=1&query=Marina+Beach+Chennai
+
+5. After all days, include these sections:
+
+HOTEL RECOMMENDATIONS
+Show as a short list with bold names.
+
+• **Hotel Name:** Example Hotel
+• Location: City Center
+• Price: ₹1000–₹1500 per night
+• Map: link
+
+FOOD RECOMMENDATIONS
+Recommend 3 local restaurants.
+
+WEATHER SUMMARY
+Short bullet points.
+
+BUDGET SUMMARY
+Clear bullet breakdown.
+
+PACKING SUGGESTIONS
+
+SAFETY TIPS
+
+VISUAL STYLE RULES:
+
+* Keep sections separated by spacing
+* Use bullet points instead of paragraphs
+* Highlight important numbers (distance, price, time)
+* Ensure Google Maps links are clickable`;
+
       const payload = {
         destination: data.destination,
         fromLocation: data.fromLocation,
@@ -78,6 +156,7 @@ const PlanTrip = () => {
         email: data.email,
         timestamp: new Date().toISOString(),
         source: "travel-ai-platform",
+        prompt: formattingPrompt // Added custom formatting
       };
 
       const controller = new AbortController();
